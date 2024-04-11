@@ -1,5 +1,10 @@
 import os
+from dotenv import load_dotenv
 import sys
+
+load_dotenv()
+output_folder = os.getenv('OUTPUT_FOLDER')
+
 
 def folder(path):
     try:
@@ -9,14 +14,18 @@ def folder(path):
 
         contents = os.listdir(path)
         if contents:
-            print("content of the folder:")
-            for item in contents:
-                print(item)
-            else:
-                print(item)
-        else:
-            print("folder is empty")         
+            new_output_folder = os.path.join(output_folder, "test")
             
+            os.makedirs(new_output_folder, exist_ok=True)
+            
+            output_file_path = os.path.join(new_output_folder, 'folder_contents.txt')
+            
+            with open(output_file_path, 'w') as f:
+                for item in contents:
+                    f.write(f"{item}\n")
+            print(f"Contents written to {output_file_path}")
+        else:
+            print("The folder is empty.")
     except FileNotFoundError as e:
         print(f"Error: {e}")
     except PermissionError:
