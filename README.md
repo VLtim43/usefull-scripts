@@ -1,1 +1,1 @@
-# useful-python-scripts
+# usefull-scripts
