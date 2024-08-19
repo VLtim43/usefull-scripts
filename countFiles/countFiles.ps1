@@ -25,7 +25,11 @@ $totalFiles = (Get-ChildItem -Path $folderPath -File -Recurse | Measure-Object).
 Write-Output "Total files: $totalFiles"
 
 $totalFolders = (Get-ChildItem -Path $folderPath -Directory -Recurse | Measure-Object).Count
-Write-Output "Total folders: $totalFolders"
+
+if ($totalFolders -ne 0) {
+    Write-Output "Total folders: $totalFolders"
+}
+
 
 foreach ($fileType in $fileTypes) {
     $count = (Get-ChildItem -Path $folderPath -Filter $fileType -File -Recurse | Measure-Object).Count
